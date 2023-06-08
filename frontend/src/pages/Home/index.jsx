@@ -1,5 +1,11 @@
 import { Container, Banner } from "./styles";
 import { Header } from '../../components/Header';
+import { Card } from '../../components/Card';
+
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css";
+
+import Dish from "../../assets/Dish.png";
 
 import MacarronsMobile from '../../assets/MacarronsMobile.png'
 
@@ -18,6 +24,38 @@ export function Home () {
                     </div>
                 </div>
             </Banner>
+
+            <Swiper spaceBetween={80} slidesPerView={2}>
+                <SwiperSlide>
+                    <Card 
+                        image={Dish}
+                        title="Salada Ravanello"
+                        price="R$ 49,97"
+                    />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <Card 
+                        image={Dish}
+                        title="Salada Ravanello"
+                        price="R$ 49,97"
+                    />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <Card 
+                        image={Dish}
+                        title="Salada Ravanello"
+                        price="R$ 49,97"
+                    />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <Card 
+                        image={Dish}
+                        title="Salada Ravanello"
+                        price="R$ 49,97"
+                    />
+                </SwiperSlide>
+            </Swiper>
+            
         </Container>
     )
 }

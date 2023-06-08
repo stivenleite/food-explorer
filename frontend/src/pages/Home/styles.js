@@ -10,6 +10,8 @@ export const Banner = styled.div`
 
     position: relative;
 
+    margin-bottom: 6.2rem;
+
     > img {
         position: absolute;
         bottom: 0;
