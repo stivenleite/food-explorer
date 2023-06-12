@@ -1,9 +1,10 @@
-import { Container, Banner } from "./styles";
+import { Container, Banner, Content, SliderContainer } from "./styles";
 import { Header } from '../../components/Header';
+import { Footer } from '../../components/Footer';
 import { Card } from '../../components/Card';
 
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css";
+import { register } from 'swiper/element/bundle'
+register();
 
 import Dish from "../../assets/Dish.png";
 
@@ -14,48 +15,84 @@ export function Home () {
         <Container>
             <Header />
 
-            <Banner>
-                <img src={MacarronsMobile} alt="" />
+            <main>
+                <Content>
+                    <Banner>
+                        <img src={MacarronsMobile} alt="" />
 
-                <div className="rectangle-wrapper">
-                    <div className="text-wrapper">
-                        <h1>Sabores inigualáveis</h1>
-                        <span>Sinta o cuidado do preparo com ingredientes selecionados.</span>
-                    </div>
-                </div>
-            </Banner>
+                        <div className="rectangle-wrapper">
+                            <div className="text-wrapper">
+                                <h1>Sabores inigualáveis</h1>
+                                <span>Sinta o cuidado do preparo com ingredientes selecionados.</span>
+                            </div>
+                        </div>
+                    </Banner>
 
-            <Swiper spaceBetween={80} slidesPerView={2}>
-                <SwiperSlide>
-                    <Card 
-                        image={Dish}
-                        title="Salada Ravanello"
-                        price="R$ 49,97"
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Card 
-                        image={Dish}
-                        title="Salada Ravanello"
-                        price="R$ 49,97"
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Card 
-                        image={Dish}
-                        title="Salada Ravanello"
-                        price="R$ 49,97"
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Card 
-                        image={Dish}
-                        title="Salada Ravanello"
-                        price="R$ 49,97"
-                    />
-                </SwiperSlide>
-            </Swiper>
-            
+                    <section>
+                        <SliderContainer>
+                            <h2>Refeições</h2>
+
+                            <swiper-container slides-per-view='2' grab-cursor='true' space-between='94'>
+                                <swiper-slide>
+                                    <Card 
+                                        image={Dish}
+                                        title='Salada Ravanello'
+                                        price='R$ 49,97'
+                                    />
+                                </swiper-slide>
+                                    
+                                <swiper-slide>
+                                    <Card 
+                                        image={Dish}
+                                        title='Salada Ravanello'
+                                        price='R$ 49,97'
+                                    />
+                                </swiper-slide>
+
+                                <swiper-slide>
+                                    <Card 
+                                        image={Dish}
+                                        title='Salada Ravanello'
+                                        price='R$ 49,97'
+                                    />
+                                </swiper-slide>
+                            </swiper-container>
+                        </SliderContainer>
+
+                        <SliderContainer>
+                            <h2>Refeições</h2>
+
+                            <swiper-container slides-per-view='2' grab-cursor='true' space-between='94'>
+                                <swiper-slide>
+                                    <Card 
+                                        image={Dish}
+                                        title='Salada Ravanello'
+                                        price='R$ 49,97'
+                                    />
+                                </swiper-slide>
+                                    
+                                <swiper-slide>
+                                    <Card 
+                                        image={Dish}
+                                        title='Salada Ravanello'
+                                        price='R$ 49,97'
+                                    />
+                                </swiper-slide>
+
+                                <swiper-slide>
+                                    <Card 
+                                        image={Dish}
+                                        title='Salada Ravanello'
+                                        price='R$ 49,97'
+                                    />
+                                </swiper-slide>
+                            </swiper-container>
+                        </SliderContainer>
+                    </section>
+                </Content>
+            </main>
+
+            <Footer />
         </Container>
     )
 }
