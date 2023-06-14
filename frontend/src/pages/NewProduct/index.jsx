@@ -1,6 +1,7 @@
 import { Container, Content } from "./styles";
 import { HeaderAdmin } from "../../components/HeaderAdmin";
 import { Input } from "../../components/Input";
+import { Select } from "../../components/Select";
 
 import { FiChevronLeft } from "react-icons/fi";
 
@@ -21,6 +22,43 @@ export function NewProduct () {
 
             <label>
               Imagem do produto
+            </label>
+
+            <label>
+              Nome
+              <Input 
+                type='text'
+                placeholder='Ex.: Salada Ceasar'
+              />
+            </label>
+
+            <label>
+              Categoria
+              <Select />
+            </label>
+
+            <label>
+              Nome
+              <Input 
+                type='text'
+                placeholder='Ex.: Salada Ceasar'
+              />
+            </label>
+
+            <label>
+              Nome
+              <Input 
+                type='text'
+                placeholder='Ex.: Salada Ceasar'
+              />
+            </label>
+
+            <label>
+              Nome
+              <Input 
+                type='text'
+                placeholder='Ex.: Salada Ceasar'
+              />
             </label>
 
             <label>
