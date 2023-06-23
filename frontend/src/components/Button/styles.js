@@ -7,7 +7,7 @@ export const Container = styled.button`
     border: none;
     border-radius: 0.5rem;
 
-    background-color: ${({theme}) => theme.colors.tomato100};
+    background-color: ${({theme, disabled}) => disabled ? theme.colors.tomato400 : theme.colors.tomato100};
     color: ${({theme}) => theme.colors.light100};
 
     font-size: 1.4rem;

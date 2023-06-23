@@ -1,36 +1,93 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Container } from "./styles";
-import { MenuMobile } from "../MenuMobile";
+import { useAuth } from '../../hooks/auth';
+
+import { useNavigate } from 'react-router-dom';
+
+import { Container, MenuMobile } from "./styles";
+
+import { Input } from '../Input';
+import { Footer } from '../Footer';
+
+import { FiSearch, FiMenu, FiX } from 'react-icons/fi'
 
 import Logo from '../../assets/Logo.svg'
-import Menu from '../../assets/Menu.svg'
 import Receipt from '../../assets/Receipt.svg'
 
-export function Header () {
-   const [menuIsVisible, setMenuIsVisible] = useState(false);
+export function Header ({dataFromHeaderMenuMobile}) {
+    const navigate = useNavigate();
+    const { user, signOut } = useAuth();
+
+    const [menuIsVisible, setMenuIsVisible] = useState(false);
+
+    function handleSignOut(){
+        signOut();
+        navigate("/");
+    }
+
+    function handleNewProduct(){
+        navigate("/newproduct");
+        setMenuIsVisible(false);
+    }
+
+    function handleKeyPress(e){
+        if (e.key === 'Enter'){
+            setMenuIsVisible(false)
+        }
+    }
 
     return (
         <>
-        <MenuMobile 
-            menuIsVisible={menuIsVisible}
-            setMenuIsVisible={setMenuIsVisible}
-        />
+        <MenuMobile isVisible={menuIsVisible}>
+            <header>
+                <button onClick={() => setMenuIsVisible(false)}>
+                    <FiX size={32}/>
+                </button>
+                Menu
+            </header>
 
-        <Container>
+            <main>
+                <Input
+                    icon={FiSearch}
+                    placeholder='Busque por pratos ou ingredientes'
+                    onChange={e => dataFromHeaderMenuMobile(e.target.value)}
+                    onKeyPress={e => handleKeyPress(e)}
+                />
+
+                <nav>
+                    {user.admin ? <a onClick={handleNewProduct}>Novo prato</a> : <></>}
+                    <a onClick={handleSignOut}>Sair</a>
+                </nav>
+            </main>
+
+            <Footer/>
+        </MenuMobile>
+
+        <Container isAdmin={user.admin}>
             <button 
                 className="menu"
                 onClick={() => setMenuIsVisible(true)}
             >
-                <img src={Menu} />
+                <FiMenu size={32}/>
             </button>
             
-            <img src={Logo} />   
+            { user.admin ? 
+                <div className="wrapper">
+                    <img src={Logo} />
+                    <span>admin</span>
+                </div>
+            :
+                <>
+                    <img src={Logo} />   
 
-            <button className="cart">
-                <div className="circle">0</div>
-                <img src={Receipt} />
-            </button>
+                    <button className="cart">
+                        <div className="circle">0</div>
+                        <img src={Receipt} />
+                    </button>
+                </>
+            }
+
+
         </Container>
         </>
     )

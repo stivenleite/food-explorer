@@ -1,73 +1,175 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 export const Container = styled.div`
-    grid-area: header;
+    width: 100%;
+    height: 7rem;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 5.6rem 2.8rem 2.4rem;
+    padding-inline: 2.8rem;
 
     background-color: ${({theme}) => theme.colors.dark700};
 
-    img {
-        width: 16rem;
-    }
+    ${({isAdmin}) => isAdmin ? css`
+        > .menu {
+            display: flex;
+            align-items: center;
 
-    > .menu {
-        display: flex;
-        align-items: center;
+            border: none;
+            background-color: transparent;
 
-        border: none;
-        background-color: transparent;
-
-        img {
-            width: 2.4rem;
-        }
-    }
-
-    > .logo {
-        display: flex;
-        align-items: center;
-        
-    }
-
-    > .cart {
-        position: relative;
-
-        width: 3.5rem;
-        height: 3rem;
-
-        border: none;
-        background-color: transparent;
-
-        img {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-
-            width: 2.6rem;
+            color: ${({theme}) => theme.colors.light100};
         }
 
-        > .circle {
-            position: absolute;
-            right: 0;
-            top: 0;
-            z-index: 1;
-
-            border-radius: 50%;
-            width: 2rem;
-            height: 2rem;
-
+        > .wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: .8rem;
 
-            font-size: 1.4rem;
+            width: 89%;
+
+            img {
+                width: 16rem;
+            }
+
+            span {
+                font-family: 'Roboto', sans-serif;
+                font-size: 1.2rem;
+                font-weight: 400;
+                color: ${({theme}) => theme.colors.cake200};
+            }
+        }
+    ` : css`
+        img {
+            width: 16rem;
+        }
+
+        > .menu {
+            display: flex;
+            align-items: center;
+
+            border: none;
+            background-color: transparent;
+
             color: ${({theme}) => theme.colors.light100};
+        }
 
-            background-color: ${({theme}) => theme.colors.tomato200};
+        > .logo {
+            display: flex;
+            align-items: center;
+            
+        }
+
+        > .cart {
+            position: relative;
+
+            width: 3.5rem;
+            height: 3rem;
+
+            border: none;
+            background-color: transparent;
+
+            img {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+
+                width: 2.6rem;
+            }
+
+            > .circle {
+                position: absolute;
+                right: 0;
+                top: 0;
+                z-index: 1;
+
+                border-radius: 50%;
+                width: 2rem;
+                height: 2rem;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                font-size: 1.4rem;
+                color: ${({theme}) => theme.colors.light100};
+
+                background-color: ${({theme}) => theme.colors.tomato200};
+            }
+        }
+    `}
+`;
+
+export const MenuMobile = styled.section`
+    position: absolute;
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100vh;
+
+    opacity: 0;
+    pointer-events: none;
+
+    background-color: ${({ theme }) => theme.colors.dark400};
+
+    > header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1.6rem;
+
+        height: 7rem;
+    
+        padding-inline: 2.8rem;
+    
+        background-color: ${({theme}) => theme.colors.dark700};
+
+        font-family: 'Roboto', sans-serif;
+        font-size: 2.2rem;
+
+        button {
+            display: flex;
+            align-items: center;
+
+            border: none;
+            background-color: transparent;
+
+            color: ${({theme}) => theme.colors.light100};
         }
     }
+
+    > main {
+        flex: 1;
+
+        margin: 3.6rem 2.8rem 0;
+        
+        nav {
+            margin-top: 3.6rem;
+    
+            display: flex;
+            flex-direction: column;
+            
+            a {
+                font-family: 'Poppins', sans-serif;
+                font-size: 2.4rem;
+                font-weight: 300;
+                color: ${({theme}) => theme.colors.light300};
+
+                padding: 1rem;
+
+                border-bottom: 1px solid ${({theme}) => theme.colors.dark1000};
+            }
+        }
+    }
+
+    ${({isVisible}) => isVisible && css`
+        opacity: 1;
+        pointer-events: auto;
+    `}
 `;

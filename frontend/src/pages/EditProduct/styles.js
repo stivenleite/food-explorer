@@ -61,6 +61,16 @@ export const Content = styled.div`
 
     border-radius: 0.8rem;
   }
+
+  .buttons-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3.2rem;
+
+    button:first-child {
+      background-color: ${({theme}) => theme.colors.dark800};
+    }
+  }
 `;
 
 export const InputFile = styled.div`

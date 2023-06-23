@@ -4,15 +4,11 @@ export const Container = styled.div`
     width: 100%;
     height: 100vh;
      
-    display: grid;
-    grid-template-rows: 11.4rem auto 7.7rem;
-    grid-template-areas:
-    'header'
-    'content'
-    'footer'; 
+    display: flex;
+    flex-direction: column;
 
     > main {
-        grid-area: content;
+        flex: 1;
 
         overflow-y: auto;
     }
@@ -25,10 +21,15 @@ export const Content = styled.div`
     > section {
         display: flex;
         flex-direction: column;
-        gap: 3rem;
+        gap: 2.4rem;
 
+        margin: 0 0 2.4rem 2.4rem;
 
-        margin: 6.2rem 0 2.4rem 2.4rem;
+        h2 {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: ${({theme}) => theme.colors.light300};
+        }
     }
 `;
 
@@ -36,7 +37,10 @@ export const Banner = styled.div`
     height: 16.4rem;
     width: 100%;
 
+    margin-bottom: 6.2rem;
+
     position: relative;
+
     > img {
         position: absolute;
         bottom: 0;
@@ -82,11 +86,17 @@ export const Banner = styled.div`
 `;
 
 export const SliderContainer = styled.div`
-    > h2 {
-        font-size: 1.8rem;
-        font-weight: 500;
-        color: ${({theme}) => theme.colors.light300};
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 1.6rem;
+    overflow: auto;
+    white-space: nowrap;
 
-        margin-bottom: 2.4rem;
+    div:last-child {
+        margin-right: 2.4rem;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
     }
 `;

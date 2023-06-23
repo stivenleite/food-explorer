@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Container } from "./styles";
 
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
-export function QtdeSelector () {
+export function QtdeSelector ({getQtdeFromSelector}) {
     const [qtde, setQtde] = useState(1);
 
     function handlePlusClick () {
@@ -15,14 +15,14 @@ export function QtdeSelector () {
         if (qtde === 1) {
             return;
         } else {
-            setQtde((prevState) => prevState - 1);
+            setQtde((prevState) => prevState - 1);  
         }
     }
 
-    function showQtde () {
+    useEffect(() => {
+        getQtdeFromSelector(qtde)
+    }, [qtde])
 
-    }
-    
     return (
         <Container>
             <button onClick={handleMinusClick}>

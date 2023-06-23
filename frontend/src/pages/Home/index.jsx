@@ -1,20 +1,42 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { api } from "../../services/api";
+
 import { Container, Banner, Content, SliderContainer } from "./styles";
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { Card } from '../../components/Card';
 
-import { register } from 'swiper/element/bundle'
-register();
-
-import Dish from "../../assets/Dish.png";
+import { useAuth } from "../../hooks/auth";
 
 import MacarronsMobile from '../../assets/MacarronsMobile.png'
 
-export function Home () {
+export function Home (){
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+    const [products, setProducts] = useState([]);
+    const [search, setSearch] = useState("");
+    const [productId, setProductId] = useState("");
+
+    const dataFromHeaderMenuMobile = (data) => {
+        setSearch(data);
+    };
+
+    useEffect(() =>{
+        async function fetchProducts () {
+            const response = await api.get(`/products?searchParam=${search}`);
+            setProducts(response.data);
+        }
+
+        fetchProducts();
+    }, [search])
+    
     return (
         <Container>
-            <Header />
-
+            <Header dataFromHeaderMenuMobile={dataFromHeaderMenuMobile}/>
+            
             <main>
                 <Content>
                     <Banner>
@@ -29,65 +51,20 @@ export function Home () {
                     </Banner>
 
                     <section>
-                        <SliderContainer>
                             <h2>Refeições</h2>
-
-                            <swiper-container slides-per-view='2' grab-cursor='true' space-between='94'>
-                                <swiper-slide>
-                                    <Card 
-                                        image={Dish}
-                                        title='Salada Ravanello'
-                                        price='R$ 49,97'
-                                    />
-                                </swiper-slide>
-                                    
-                                <swiper-slide>
-                                    <Card 
-                                        image={Dish}
-                                        title='Salada Ravanello'
-                                        price='R$ 49,97'
-                                    />
-                                </swiper-slide>
-
-                                <swiper-slide>
-                                    <Card 
-                                        image={Dish}
-                                        title='Salada Ravanello'
-                                        price='R$ 49,97'
-                                    />
-                                </swiper-slide>
-                            </swiper-container>
-                        </SliderContainer>
-
-                        <SliderContainer>
-                            <h2>Refeições</h2>
-
-                            <swiper-container slides-per-view='2' grab-cursor='true' space-between='94'>
-                                <swiper-slide>
-                                    <Card 
-                                        image={Dish}
-                                        title='Salada Ravanello'
-                                        price='R$ 49,97'
-                                    />
-                                </swiper-slide>
-                                    
-                                <swiper-slide>
-                                    <Card 
-                                        image={Dish}
-                                        title='Salada Ravanello'
-                                        price='R$ 49,97'
-                                    />
-                                </swiper-slide>
-
-                                <swiper-slide>
-                                    <Card 
-                                        image={Dish}
-                                        title='Salada Ravanello'
-                                        price='R$ 49,97'
-                                    />
-                                </swiper-slide>
-                            </swiper-container>
-                        </SliderContainer>
+                            <SliderContainer>
+                                {
+                                    products.map((product) => (
+                                        <Card 
+                                            key={product.id}
+                                            image={product.image}
+                                            title={product.name}
+                                            price={product.price}
+                                            id={product.id}
+                                        />
+                                    ))
+                                }
+                            </SliderContainer>
                     </section>
                 </Content>
             </main>

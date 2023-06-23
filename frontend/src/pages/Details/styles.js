@@ -3,16 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 100%;
     height: 100vh;
-     
-    display: grid;
-    grid-template-rows: 11.4rem auto 7.7rem;
-    grid-template-areas:
-    'header'
-    'content'
-    'footer'; 
+   
+    display: flex;
+    flex-direction: column;
 
     > main {
-        grid-area: content;
+        flex: 1;
 
         overflow-y: auto;
     }
@@ -21,18 +17,19 @@ export const Container = styled.div`
 export const Content = styled.div`
     margin: 1.6rem 5.6rem 3rem;
 
-    > button {
-        display: flex;
-        align-items: center;
+    > button:first-child {
+    color: ${({theme}) => theme.colors.light300};
+    font-size: 1.6rem;
+    font-weight: 500;
 
-        border: none;
-        background-color: transparent;
+    background-color: transparent;
+    border: none;
 
-        color: ${({theme}) => theme.colors.light300};
-        font-size: 2.4rem;
-        font-weight: 500;
+    display: flex;
+    align-items: center;
 
-        margin-bottom: 1.6rem;
+    margin-bottom: 2rem;
+    margin-left: -2rem;
     }
 
     > section {
@@ -42,6 +39,11 @@ export const Content = styled.div`
 
         img {
             margin-bottom: 1.6rem;
+
+            width: 60vw;
+            height: auto;
+
+            border-radius: 50%;
         }
 
         h1 {
@@ -68,8 +70,6 @@ export const Content = styled.div`
 
         height: 3.8rem;
 
-        margin-top: 4.8rem;
-
         > button {
             width: 18.8rem;
             height: 100%;
@@ -88,6 +88,9 @@ export const Content = styled.div`
 export const Tags = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 2.4rem;
     flex-wrap: wrap;
+
+    margin-bottom: 4.8rem;
 `;

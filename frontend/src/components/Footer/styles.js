@@ -1,15 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.footer`
-    grid-area: footer;
-
     width: 100%;
-    height: 7.7rem;
+    height: 5rem;
 
-    position: absolute;
-    bottom: 0;
-
-    padding: 3rem 2.8rem;
+    padding-inline: 2.8rem;
 
     display: flex;
     align-items: center;

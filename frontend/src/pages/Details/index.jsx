@@ -1,45 +1,111 @@
+import { useNavigate, useParams } from "react-router-dom";
+
+import { useState, useEffect } from "react";
+
+import { api } from "../../services/api";
+import { useAuth } from "../../hooks/auth";
+
 import { Container, Content, Tags } from "./styles";
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { Tag } from "../../components/Tag"
 import { QtdeSelector } from "../../components/QtdeSelector"
+import { Button } from "../../components/Button"
 
 import { FiChevronLeft } from "react-icons/fi";
-import Dish from '../../assets/Dish.png'
 
 export function Details () {
+    const navigate = useNavigate();
+    const params = useParams();
+    const { user } = useAuth();
+
+    const [product, setProduct] = useState([]);
+    const [imageURL, setImageURL] = useState("");
+    const [ingredients, setIngredients] = useState([]);
+    const [price, setPrice] = useState(null)
+    const [calculatedPrice, setCalculatedPrice] = useState(null)
+    const [qtde, setQtde] = useState(1);
+
+    function getQtdeFromSelector(qtde) {
+        setQtde(qtde);
+    }
+
+    useEffect(() => {
+        async function fetchProduct(){
+            const response = await api.get(`/products/${params.id}`)
+            setProduct(response.data);
+
+            const { image, ingredients, price } = response.data;
+            setImageURL(`${api.defaults.baseURL}/files/${image}`);
+            setIngredients(ingredients.map(ingredient => ingredient.name));
+            setPrice(price);
+            setCalculatedPrice(price);
+        }
+
+        fetchProduct();
+    }, [])
+
+    useEffect(() => {
+        function priceCalculation() {
+            if(price){
+                const calculatedPriceNumber = parseFloat(price.replace(",",".")) * qtde;
+                const calculatedPriceString = String(calculatedPriceNumber.toFixed(2));
+    
+                setCalculatedPrice(calculatedPriceString.replace(".", ","))
+            }
+        }
+
+        priceCalculation();
+    }, [qtde])
+
     return (
         <Container>
             <Header />
 
             <main>
                 <Content>
-                    <button>
-                        <FiChevronLeft size={32}/>
+                    <button onClick={() => navigate(-1)}>
+                        <FiChevronLeft size={22}/>
                         voltar
                     </button>
 
                     <section>
-                        <img src={Dish} alt="Foto do produto" />
-                        <h1>Salada Ravanello</h1>
-                        <p>Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.</p>
+                        <img src={imageURL} alt="Foto do produto" />
+                        <h1>{product.name}</h1>
+                        <p>{product.description}</p>
+                        
                         <Tags>
-                            <Tag title='alface'/>
-                            <Tag title='cebola'/>
-                            <Tag title='pão naan'/>
-                            <Tag title='pepino'/>
-                            <Tag title='rabanete'/>
-                            <Tag title='tomate'/>
+                            {
+                                ingredients.map((ingredient, index) => (
+                                    <Tag 
+                                        key={String(index)}
+                                        title={ingredient}
+                                    />
+                                ))
+                            }
                         </Tags>
                     </section>
-
-                    <div className="order">
-                        <QtdeSelector />
-                        <button>
-                            incluir ∙ R$ 25,00
-                        </button>
-                    </div>
-
+                    
+                    {
+                        user.admin ? 
+                        <>
+                            <Button
+                                title='Editar prato'
+                                height='4.8rem'
+                                width='100%'
+                                onClick={() => navigate(`/editproduct/${params.id}`)}
+                            />
+                        </> 
+                        : 
+                        <>
+                            <div className="order">
+                                <QtdeSelector getQtdeFromSelector={getQtdeFromSelector} />
+                                <button onClick={() => alert("Função não implementada.")}>
+                                    incluir ∙ {calculatedPrice}
+                                </button>
+                            </div>
+                        </>
+                    }
                 </Content>
             </main>
 

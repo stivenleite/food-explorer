@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { useEffect, useState } from "react";
 
 import { api } from "../../services/api";
 
@@ -7,25 +8,27 @@ import { Container, Content, InputFile, SelectContainer } from "./styles";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Input } from "../../components/Input";
+
 import { Button } from "../../components/Button";
 import { Textarea } from "../../components/Textarea";
 import { ProductTag } from "../../components/ProductTag";
 
 import { FiChevronLeft, FiChevronDown, FiShare } from "react-icons/fi";
 
-export function NewProduct () {
+export function EditProduct () {
   const navigate = useNavigate();
+  const params = useParams();
 
+  const [product, setProduct] = useState(null);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [price, setPrice] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [newIngredient, setNewIngredient] = useState(""); 
+  const [newIngredient, setNewIngredient] = useState("");
 
   const [buttonStatus, setButtonStatus] = useState(false);
-  const [disableButton, setDisableButton] = useState(true);
 
   function handleAddIngredient(){
     setIngredients(prevState => [...prevState, newIngredient])
@@ -41,7 +44,7 @@ export function NewProduct () {
     setImage(file);
   }
 
-  function handleNewProduct(){
+  async function handleUpdateProduct() {
     if(newIngredient) {
       return alert("Existem ingredientes não adicionados. Clique no sinal de + para adicionar.")
     }
@@ -51,7 +54,6 @@ export function NewProduct () {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("category", category);
-    formData.append("image", image);
     formData.append("price", price);
     formData.append("description", description);
 
@@ -59,24 +61,58 @@ export function NewProduct () {
       formData.append("ingredients", ingredient)
     ));
 
-    api.post("/products", formData)
-      .then(alert("Produto cadastrado com sucesso!"), navigate(-1))
+    if(image){
+      formData.append("image", image);
+    }
+
+    await api.put(`/products/${params.id}`, formData)
+      .then(alert("Produto atualizado com sucesso!"), navigate("/"))
       .catch((error) => {
         if(error.response){
           alert(error.response.data.message)
         }else{
-          alert("Erro ao cadastrar o produto.")
+          alert("Erro ao atualizar o produto.")
         }
-      });
+      })
 
-      setButtonStatus(false);
+    setButtonStatus(false);
+  }
+
+  async function handleDeleteProduct() {
+    const confirm = window.confirm("Tem certeza que deseja deletar este produto?");
+
+    setButtonStatus(true);
+
+    if(confirm){
+      await api.delete(`/products/${params.id}`)
+        .then(alert("Produto deletado com sucesso!"), navigate("/"))
+        .catch((error) => {
+          if(error.response){
+            alert(error.response.data.message)
+          }else{
+            alert("Erro ao deletar o produto.")
+          }
+        })
+    }
+
+    setButtonStatus(false);
   }
 
   useEffect(() => {
-    if (name && category && description && image && price && ingredients) {
-      setDisableButton(false);
-    }
-  }, [name, category, description, image, price, ingredients])
+    async function fetchProduct () {
+      const response = await api.get(`/products/${params.id}`);
+      setProduct(response.data);
+
+      const { name, category, description, price, ingredients } = response.data;
+      setName(name);
+      setCategory(category);
+      setDescription(description);
+      setPrice(price);
+      setIngredients(ingredients.map(ingredient => ingredient.name));
+      }
+      
+      fetchProduct();
+  }, []);
 
   return (
     <Container>
@@ -84,13 +120,13 @@ export function NewProduct () {
 
       <main>
         <Content>
-          <button onClick={() => navigate("/")}>
+          <button onClick={() => navigate(-1)}>
             <FiChevronLeft size={22}/>
             voltar
           </button>
 
           <form>
-            <h1>Novo prato</h1>
+            <h1>Editar prato</h1>
 
             <label>
               Imagem do produto
@@ -98,7 +134,7 @@ export function NewProduct () {
                 <input type="file" onChange={handleInputImage}/>
                 <div className="wrapper">
                   <FiShare />
-                  Selecione imagem
+                  Selecione imagem para alterá-la
               </div>
               </InputFile>
             </label>
@@ -107,7 +143,8 @@ export function NewProduct () {
               Nome
               <Input 
                 type='text'
-                placeholder='Ex.: Salada Ceasar'
+                placeholder='Salada Ceasar'
+                value={name}
                 onChange={e => setName(e.target.value)}
               />
             </label>
@@ -116,7 +153,7 @@ export function NewProduct () {
               Categoria
               <SelectContainer>
                 <select name="category" onChange={e => setCategory(e.target.value)}>
-                    <option defaultValue="">Selecione</option>
+                    { category ? <option defaultValue={category}>{category}</option> : <option defaultValue="">Selecione</option> }
                     <option value="Entradas">Entradas</option>
                     <option value="Aperitivos">Aperitivos</option>
                     <option value="Refeições">Refeições</option>
@@ -154,7 +191,7 @@ export function NewProduct () {
               Preço
               <Input 
                 type='text'
-                placeholder='Ex.: 40,00'
+                value={price}
                 onChange={e => setPrice(e.target.value)}
               />
             </label>
@@ -162,18 +199,27 @@ export function NewProduct () {
             <label>
               Descrição
               <Textarea 
-                placeholder='Fale brevemente sobre o prato, seus ingredientes e composição'
+                placeholder='A Salada César é uma opção refrescante para o verão.'
+                value={description}
                 onChange={e => setDescription(e.target.value)}
               />
             </label>
 
-            <Button 
-              title='Salvar alterações' 
-              height='4.8rem' 
-              disabled={disableButton}
-              loading={buttonStatus}
-              onClick={handleNewProduct}
-            />
+            <div className="buttons-wrapper">
+              <Button 
+                title='Excluir prato' 
+                height='4.8rem' 
+                loading={buttonStatus}
+                onClick={handleDeleteProduct}
+              />
+
+              <Button 
+                title='Salvar alterações' 
+                height='4.8rem' 
+                loading={buttonStatus}
+                onClick={handleUpdateProduct}
+              />
+            </div>
           </form>
         </Content>
       </main>

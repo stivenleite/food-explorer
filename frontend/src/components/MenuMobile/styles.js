@@ -4,8 +4,11 @@ export const Container = styled.section`
     position: absolute;
     z-index: 5;
 
+    display: flex;
+    flex-direction: column;
+
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
     opacity: 0;
     pointer-events: none;
@@ -17,8 +20,10 @@ export const Container = styled.section`
         align-items: center;
         justify-content: flex-start;
         gap: 1.6rem;
+
+        height: 7rem;
     
-        padding: 5.6rem 2.8rem 2.4rem;
+        padding-inline: 2.8rem;
     
         background-color: ${({theme}) => theme.colors.dark700};
 
@@ -35,6 +40,8 @@ export const Container = styled.section`
     }
 
     > main {
+        flex: 1;
+
         margin: 3.6rem 2.8rem 0;
         
         nav {

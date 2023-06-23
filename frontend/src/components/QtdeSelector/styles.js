@@ -16,7 +16,7 @@ export const Container = styled.div`
 
     > span {
         font-family: 'Roboto', sans-serif;
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-weight: 700;
         color: ${({theme}) => theme.colors.light300};
     }
