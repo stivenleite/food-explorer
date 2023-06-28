@@ -1,4 +1,5 @@
 import { useAuth } from '../../hooks/auth';
+import { useCart } from '../../hooks/cart';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +15,7 @@ import { FiHeart, FiEdit, FiChevronRight } from "react-icons/fi";
 
 export function Card ({image, title, price, id, ...rest}) {
   const { user } = useAuth();
+  const { handleAddToCart } = useCart();
   const navigate = useNavigate();
 
   const imageURL = `${api.defaults.baseURL}/files/${image}`
@@ -31,6 +33,17 @@ export function Card ({image, title, price, id, ...rest}) {
 
   function handleDetails () {
     navigate(`/details/${id}`)
+  }
+
+  function handleOrderItem () {
+    handleAddToCart({
+      user_id: user.id,
+      product_id: id,
+      title,
+      image,
+      price: calculatedPrice,
+      qtde
+    })
   }
 
   useEffect(() => {
@@ -71,10 +84,10 @@ export function Card ({image, title, price, id, ...rest}) {
             title="incluir"
             height="3.2rem"
             width="16.2rem"
-            onClick={() => alert("Função não implementada.")}
+            onClick={handleOrderItem}
           />
 
-          <FiHeart size={24}/>
+          <FiHeart size={24} onClick={() => alert("Função não habilitada até o momento.")}/>
         </>
       }
     </Container>

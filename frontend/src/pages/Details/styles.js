@@ -40,7 +40,7 @@ export const Content = styled.div`
         img {
             margin-bottom: 1.6rem;
 
-            width: 60vw;
+            width: 26.4rem;
             height: auto;
 
             border-radius: 50%;
@@ -50,6 +50,7 @@ export const Content = styled.div`
             font-size: 2.7rem;
             font-weight: 500;
             color:  ${({theme}) => theme.colors.light300};
+            text-align: center;
         }
 
         p {

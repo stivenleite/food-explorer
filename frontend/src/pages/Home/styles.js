@@ -25,10 +25,23 @@ export const Content = styled.div`
 
         margin: 0 0 2.4rem 2.4rem;
 
+        position: relative;
+
         h2 {
         font-size: 1.8rem;
         font-weight: 500;
         color: ${({theme}) => theme.colors.light300};
+        } 
+    }
+
+    @media (min-width: 600px) {
+        > section {
+            margin-inline: 9%;
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
         }
     }
 `;
@@ -46,6 +59,8 @@ export const Banner = styled.div`
         bottom: 0;
         left: .6rem;
         z-index: 2;
+
+        width: 45%;
     }
 
     > .rectangle-wrapper {
@@ -53,24 +68,26 @@ export const Banner = styled.div`
         bottom: 0;
         right: 1rem;
 
-        width: 87.85%;
-        height: 12rem;
+        width: 92%;
+        height: 70%;
 
         background: ${({theme}) => theme.colors.gradient200};
         border-radius: .3rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
 
         .text-wrapper {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
 
-            width: 20.2rem;
-
-            position: absolute;
-            right: 1rem;
-            top: 3.6rem;
+            width: 57%;
+            
             z-index: 3;
 
+            margin-right: 1rem;
 
             h1 {
                 font-size: 1.8rem;
@@ -83,14 +100,51 @@ export const Banner = styled.div`
             }
         }
     }
+
+    @media (min-width: 600px) {
+        height: 27rem;
+
+        overflow: hidden;
+
+        > img {
+            margin-bottom: -3rem;
+
+            left: 4rem;
+
+            
+        }
+
+        > .rectangle-wrapper {
+            width: 82%;
+            
+
+            left: 50%;
+            transform: translateX(-50%);
+
+            .text-wrapper {
+                margin-right: 2rem;
+
+                h1 {
+                    font-size: 2.2rem;
+                    text-align: end;
+                }
+
+                span {
+                    font-size: 1.4rem;
+                    text-align: end;
+                }
+            }
+        }
+    }
 `;
 
 export const SliderContainer = styled.div`
-    display: grid;
-    grid-auto-flow: column;
-    grid-gap: 1.6rem;
-    overflow: auto;
-    white-space: nowrap;
+    display: flex;
+    gap: 1.6rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
 
     div:last-child {
         margin-right: 2.4rem;

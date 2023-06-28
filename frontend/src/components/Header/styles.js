@@ -1,6 +1,6 @@
 import styled, {css} from "styled-components";
 
-export const Container = styled.div`
+export const ContainerMobile = styled.div`
     width: 100%;
     height: 7rem;
 
@@ -172,4 +172,46 @@ export const MenuMobile = styled.section`
         opacity: 1;
         pointer-events: auto;
     `}
+`;
+
+export const ContainerDesktop = styled.div`
+    width: 100%;
+    height: 10.4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    background-color: ${({theme}) => theme.colors.dark600};
+
+    > .content {
+        width: 100%;
+        max-width: 112rem;
+        height: 4.8rem;
+
+        display: flex;
+        align-items: center;
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+
+            height: 100%;
+            position: relative;
+
+            img {
+                width: 19.7rem;
+            }
+
+            span {
+                font-family: 'Roboto', sans-serif;
+                font-size: 1.2rem;
+                color: ${({theme}) => theme.colors.cake200};
+
+                position: absolute;
+                right: 0;
+                bottom: 0;
+            }
+        }
+    }
 `;

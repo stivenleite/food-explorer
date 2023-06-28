@@ -10,6 +10,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1.2rem;
+  flex: 0 0 auto;
 
   width: 21rem;
   height: 29.2rem;

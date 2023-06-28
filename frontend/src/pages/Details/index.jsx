@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
+import { useCart } from "../../hooks/cart";
 
 import { Container, Content, Tags } from "./styles";
 import { Header } from "../../components/Header"
@@ -18,6 +19,7 @@ export function Details () {
     const navigate = useNavigate();
     const params = useParams();
     const { user } = useAuth();
+    const { handleAddToCart } = useCart();
 
     const [product, setProduct] = useState([]);
     const [imageURL, setImageURL] = useState("");
@@ -29,6 +31,17 @@ export function Details () {
     function getQtdeFromSelector(qtde) {
         setQtde(qtde);
     }
+
+    function handleOrderItem () {
+        handleAddToCart({
+          user_id: user.id,
+          product_id: product.id,
+          title: product.name,
+          image: product.image,
+          price: calculatedPrice,
+          qtde
+        })
+      }
 
     useEffect(() => {
         async function fetchProduct(){
@@ -100,7 +113,7 @@ export function Details () {
                         <>
                             <div className="order">
                                 <QtdeSelector getQtdeFromSelector={getQtdeFromSelector} />
-                                <button onClick={() => alert("Função não implementada.")}>
+                                <button onClick={handleOrderItem}>
                                     incluir ∙ {calculatedPrice}
                                 </button>
                             </div>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { api } from "../../services/api";
 
@@ -8,17 +7,12 @@ import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { Card } from '../../components/Card';
 
-import { useAuth } from "../../hooks/auth";
-
-import MacarronsMobile from '../../assets/MacarronsMobile.png'
+import Macarrons from '../../assets/Macarrons.png'
 
 export function Home (){
-    const { user } = useAuth();
-    const navigate = useNavigate();
-
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState("");
-    const [productId, setProductId] = useState("");
+    const [categories, setCategories] = useState([]);
 
     const dataFromHeaderMenuMobile = (data) => {
         setSearch(data);
@@ -28,6 +22,8 @@ export function Home (){
         async function fetchProducts () {
             const response = await api.get(`/products?searchParam=${search}`);
             setProducts(response.data);
+
+            setCategories([...new Set(response.data.map(product => product.category))]);
         }
 
         fetchProducts();
@@ -40,7 +36,7 @@ export function Home (){
             <main>
                 <Content>
                     <Banner>
-                        <img src={MacarronsMobile} alt="" />
+                        <img src={Macarrons} alt="" />
 
                         <div className="rectangle-wrapper">
                             <div className="text-wrapper">
@@ -50,22 +46,28 @@ export function Home (){
                         </div>
                     </Banner>
 
-                    <section>
-                            <h2>Refeições</h2>
-                            <SliderContainer>
-                                {
-                                    products.map((product) => (
-                                        <Card 
-                                            key={product.id}
-                                            image={product.image}
-                                            title={product.name}
-                                            price={product.price}
-                                            id={product.id}
-                                        />
-                                    ))
-                                }
-                            </SliderContainer>
-                    </section>
+                    {
+                        categories.map((category, index) => (
+                        <section key={index}>    
+                                <h2>{category}</h2>
+                                <SliderContainer>
+                                    {
+                                        products
+                                            .filter(product => product.category == category)
+                                            .map(product => (
+                                                <Card 
+                                                    key={product.id}
+                                                    image={product.image}
+                                                    title={product.name}
+                                                    price={product.price}
+                                                    id={product.id}
+                                                />
+                                            ))
+                                    }
+                                </SliderContainer>
+                        </section>
+                        ))
+                    }
                 </Content>
             </main>
 
