@@ -108,22 +108,26 @@ export function Header ({dataFromHeaderMenuMobile}) {
                     <div className="content">
                         <div className="logo-wrapper">
                             <img src={Logo} />
-                            {true ? <span>admin</span> : <></>}
+                            {user.admin ? <span>admin</span> : <></>}
                         </div>
 
                         <Input
-                            icon={FiSearch}
                             placeholder='Busque por pratos ou ingredientes'
                             onChange={e => dataFromHeaderMenuMobile(e.target.value)}
                             onKeyPress={e => handleKeyPress(e)}
                         />
 
-                        <button >
-                            <img src={Receipt} alt="" />
-                            <span>Pedidos ({userCart.length})</span>
-                        </button>
+                        {
+                            user.admin ? 
+                                <button onClick={handleNewProduct}>Novo prato</button>
+                            :
+                                <button onClick={() => navigate(`/cart`)}>
+                                    <img src={Receipt} alt="" />
+                                    <span>Pedidos ({userCart.length})</span>
+                                </button>
+                        }
 
-                        <FiLogOut />
+                        <FiLogOut size={28} onClick={handleSignOut}/>
                     </div>
                 </ContainerDesktop>
         }

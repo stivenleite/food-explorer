@@ -20,4 +20,10 @@ export const Container = styled.div`
         font-weight: 700;
         color: ${({theme}) => theme.colors.light300};
     }
+
+    @media (min-width: 1000px) {
+        > span {
+            font-size: 2.2rem;
+        }
+    }
 `;

@@ -11,7 +11,7 @@ import { Container } from "./styles";
 import { QtdeSelector } from "../QtdeSelector";
 import { Button } from "../Button";
 
-import { FiHeart, FiEdit, FiChevronRight } from "react-icons/fi";
+import { FiHeart, FiEdit } from "react-icons/fi";
 
 export function Card ({image, title, price, id, ...rest}) {
   const { user } = useAuth();
@@ -68,7 +68,6 @@ export function Card ({image, title, price, id, ...rest}) {
 
       <h3 onClick={handleDetails}>
           {title}
-          <FiChevronRight />
       </h3>
 
       <span>
@@ -78,14 +77,17 @@ export function Card ({image, title, price, id, ...rest}) {
       {
         user.admin ? <FiEdit size={24} onClick={handleEdit}/> : 
         <>
-          <QtdeSelector getQtdeFromSelector={getQtdeFromSelector}/>
 
-          <Button 
-            title="incluir"
-            height="3.2rem"
-            width="16.2rem"
-            onClick={handleOrderItem}
-          />
+          <div className="order-wrapper">
+            <QtdeSelector getQtdeFromSelector={getQtdeFromSelector}/>
+
+            <Button 
+              title="incluir"
+              height="3.2rem"
+              width="16.2rem"
+              onClick={handleOrderItem}
+            />
+          </div>
 
           <FiHeart size={24} onClick={() => alert("Função não habilitada até o momento.")}/>
         </>

@@ -3,8 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     align-items: center;
+    gap: 1.2rem;
 
     width: 100%;
+    max-width: 10rem;
     border-radius: 0.8rem;
     padding-inline: 1.4rem;
 
@@ -26,8 +28,6 @@ export const Container = styled.div`
     }
 
     > svg {
-        margin-right: 1.2rem;
-        
         color: ${({theme}) => theme.colors.light500};
     }
 

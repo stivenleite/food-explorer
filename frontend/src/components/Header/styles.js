@@ -180,7 +180,9 @@ export const ContainerDesktop = styled.div`
 
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+
+    padding-inline: 2rem;
 
     background-color: ${({theme}) => theme.colors.dark600};
 
@@ -191,6 +193,7 @@ export const ContainerDesktop = styled.div`
 
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
         .logo-wrapper {
             display: flex;
@@ -212,6 +215,40 @@ export const ContainerDesktop = styled.div`
                 right: 0;
                 bottom: 0;
             }
+        }
+
+        div:nth-child(2) {
+            max-width: 50rem;
+            
+            input {
+                text-align: center;
+            }
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .8rem;
+
+            width: 21.6rem;
+            height: 100%;
+
+            background-color: ${({theme}) => theme.colors.tomato100};
+            border: none;
+            border-radius: .5rem;
+
+            font-size: 1.4rem;
+            color: ${({theme}) => theme.colors.light100};
+        }
+
+        svg {
+            color: ${({theme}) => theme.colors.light100};
+            cursor: pointer;
+        }
+
+        svg:hover {
+            filter: brightness(0.7);
         }
     }
 `;

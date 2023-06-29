@@ -15,6 +15,8 @@ export const Container = styled.div`
   width: 21rem;
   height: 29.2rem;
 
+  padding-inline: 1.2rem;
+
   position: relative;
 
   > img {
@@ -26,9 +28,7 @@ export const Container = styled.div`
     font-size: 1.4rem;
     font-weight: 500;
     color: ${({theme}) => theme.colors.light300};
-
-    display: flex;
-    align-items: center;
+    text-align: center;
   }
 
   > span {
@@ -48,5 +48,35 @@ export const Container = styled.div`
     right: 1.6rem;
 
     cursor: pointer;
+  }
+
+  > .order-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  @media (min-width: 1000px) {
+    width: 30.4rem;
+    height: 46.2rem;
+    gap: 1.5rem;
+
+    > img {
+      width: 17.6rem;
+    }
+
+    > h3 {
+      font-size: 2.4rem;
+    }
+
+    > span {
+      font-size: 3.2rem;
+    }
+
+    > .order-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+  }
   }
 `;

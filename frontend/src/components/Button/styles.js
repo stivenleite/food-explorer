@@ -17,4 +17,9 @@ export const Container = styled.button`
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
+
+    @media (min-width: 1000px) {
+        height: 4.8rem;
+        width: 9.2rem;
+    }
 `;

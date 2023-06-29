@@ -17,6 +17,10 @@ export const Container = styled.div`
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
+    margin-inline: auto;
+    margin-bottom: 4.8rem;
+
+    max-width: 112rem;
 
     > section {
         display: flex;
@@ -41,7 +45,17 @@ export const Content = styled.div`
             h2 {
                 font-size: 2.2rem;
             }
+        }
+    }
 
+    @media (min-width: 1000px) {
+        > section {
+            margin: 0;
+
+            h2 {
+                font-size: 3.2rem;
+                font-weight: 400;
+            }
         }
     }
 `;
@@ -104,7 +118,7 @@ export const Banner = styled.div`
     @media (min-width: 600px) {
         height: 27rem;
 
-        overflow: hidden;
+        overflow-y: hidden;
 
         > img {
             margin-bottom: -3rem;
@@ -132,6 +146,38 @@ export const Banner = styled.div`
                 span {
                     font-size: 1.4rem;
                     text-align: end;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 1000px) {
+        height: 43rem;
+        margin-top: 3.3rem;
+
+        > img {
+            width: 65rem;
+            left: 0;
+            margin-bottom: -8rem;
+            margin-left: -5.5rem;
+        }
+
+        > .rectangle-wrapper {
+            width: 100%;
+            height: 26rem;
+
+            .text-wrapper {
+                margin-right: 7rem;
+
+                h1 {
+                    font-size: 4rem;
+                    font-weight: 400;
+                    letter-spacing: .3rem;
+                }
+
+                span {
+                    font-size: 1.6rem;
+                    font-weight: 200;
                 }
             }
         }
