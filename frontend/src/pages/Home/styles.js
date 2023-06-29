@@ -30,12 +30,15 @@ export const Content = styled.div`
         margin: 0 0 2.4rem 2.4rem;
 
         position: relative;
+        
 
         h2 {
         font-size: 1.8rem;
         font-weight: 500;
         color: ${({theme}) => theme.colors.light300};
         } 
+
+        
     }
 
     @media (min-width: 600px) {
@@ -72,7 +75,7 @@ export const Banner = styled.div`
         position: absolute;
         bottom: 0;
         left: .6rem;
-        z-index: 2;
+        z-index: 1;
 
         width: 45%;
     }
@@ -167,13 +170,25 @@ export const Banner = styled.div`
             height: 26rem;
 
             .text-wrapper {
-                margin-right: 7rem;
+                margin-right: 5rem;
 
                 h1 {
                     font-size: 4rem;
                     font-weight: 400;
-                    letter-spacing: .3rem;
                 }
+
+                span {
+                    font-size: 1.4rem;
+                    font-weight: 200;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 1100px) {
+        > .rectangle-wrapper {
+            .text-wrapper {
+                margin-right: 7rem;
 
                 span {
                     font-size: 1.6rem;

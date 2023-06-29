@@ -23,7 +23,7 @@ export const Container = styled.div`
 
     @media (min-width: 1000px) {
         > span {
-            font-size: 2.2rem;
+            font-size: 2.8rem;
         }
     }
 `;

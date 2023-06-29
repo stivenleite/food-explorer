@@ -71,12 +71,14 @@ export const Container = styled.div`
     }
 
     > span {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
     }
 
     > .order-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      button:last-child {
+        height: 4.8rem;
+      }
   }
   }
 `;

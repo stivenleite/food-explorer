@@ -81,7 +81,7 @@ export function Card ({image, title, price, id, ...rest}) {
           <div className="order-wrapper">
             <QtdeSelector getQtdeFromSelector={getQtdeFromSelector}/>
 
-            <Button 
+            <Button
               title="incluir"
               height="3.2rem"
               width="16.2rem"

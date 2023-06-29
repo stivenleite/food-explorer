@@ -19,7 +19,6 @@ export const Container = styled.button`
     gap: 0.6rem;
 
     @media (min-width: 1000px) {
-        height: 4.8rem;
-        width: 9.2rem;
+        font-size: 2rem;
     }
 `;
