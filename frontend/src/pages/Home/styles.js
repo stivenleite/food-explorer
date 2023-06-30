@@ -30,7 +30,7 @@ export const Content = styled.div`
         margin: 0 0 2.4rem 2.4rem;
 
         position: relative;
-        
+        max-width: 112rem;  
 
         h2 {
         font-size: 1.8rem;
@@ -38,7 +38,55 @@ export const Content = styled.div`
         color: ${({theme}) => theme.colors.light300};
         } 
 
+        #shadow-left {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+
+            width: 23rem;
+            height: 46.2rem;
+
+            background: ${({theme}) => theme.colors.gradient100left};
+
+            display: flex;
+            align-items: center;
+
+            svg {
+                cursor: pointer;
+            }
+
+            @media (max-width: 1000px) {
+                display: none;
+            }
+        }
+
+        #shadow-right {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            width: 23rem;
+            height: 46.2rem;
+
+            background: ${({theme}) => theme.colors.gradient100right};
+
+            display: flex;
+            align-items: center;
+            justify-content: end;
+
+            svg {
+                cursor: pointer;
+            }
+
+            @media (max-width: 1000px) {
+                display: none;
+            }
+        }
         
+        .hide {
+            opacity: 0;
+            pointer-events: none;
+        }
     }
 
     @media (min-width: 600px) {
@@ -53,7 +101,7 @@ export const Content = styled.div`
 
     @media (min-width: 1000px) {
         > section {
-            margin: 0;
+            margin-inline: 0%;
 
             h2 {
                 font-size: 3.2rem;
@@ -204,6 +252,7 @@ export const SliderContainer = styled.div`
     gap: 1.6rem;
     flex-wrap: nowrap;
     overflow-x: auto;
+    scroll-behavior: smooth;
 
     -webkit-overflow-scrolling: touch;
 

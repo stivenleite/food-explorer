@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { api } from "../../services/api";
 
@@ -8,17 +8,40 @@ import { Footer } from '../../components/Footer';
 import { Card } from '../../components/Card';
 
 import Macarrons from '../../assets/Macarrons.png'
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 export function Home (){
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState("");
     const [categories, setCategories] = useState([]);
+    const [sliderPosition, setSliderPosition] = useState(0);
+    const slider = useRef();
+    const [reachedEnd, setReachedEnd] = useState(false);
 
     const dataFromHeaderMenuMobile = (data) => {
         setSearch(data);
     };
 
-    useEffect(() =>{
+    function scrollLeft () {
+        slider.current.scrollLeft -= 294;
+        setSliderPosition(slider.current.scrollLeft)
+
+        setReachedEnd(false);
+    }
+
+    function scrollRight () {
+        slider.current.scrollLeft += 294
+        setSliderPosition(slider.current.scrollLeft)
+
+        const isEndReached = slider.current.scrollLeft === (slider.current.scrollWidth - slider.current.offsetWidth);
+        setReachedEnd(isEndReached);
+    }
+
+    function handleSliderScroll (e) {
+        setSliderPosition(e.target.scrollLeft);
+    }
+
+    useEffect(() => {
         async function fetchProducts () {
             const response = await api.get(`/products?searchParam=${search}`);
             setProducts(response.data);
@@ -50,7 +73,7 @@ export function Home (){
                         categories.map((category, index) => (
                         <section key={index}>    
                                 <h2>{category}</h2>
-                                <SliderContainer>
+                                <SliderContainer ref={slider} onScroll={e => handleSliderScroll(e)}>
                                     {
                                         products
                                             .filter(product => product.category == category)
@@ -65,6 +88,8 @@ export function Home (){
                                             ))
                                     }
                                 </SliderContainer>
+                                <div id="shadow-left" className={sliderPosition == 0 ? "hide" : ""}><FiChevronLeft size={60} onClick={scrollLeft}/></div>
+                                <div id="shadow-right" className={reachedEnd ? "hide" : ""}><FiChevronRight size={60} onClick={scrollRight}/></div>
                         </section>
                         ))
                     }
