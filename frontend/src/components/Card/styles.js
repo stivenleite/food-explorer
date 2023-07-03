@@ -29,7 +29,13 @@ export const Container = styled.div`
     font-weight: 500;
     color: ${({theme}) => theme.colors.light300};
     text-align: center;
+
+    cursor: pointer;
   }
+
+  > h3:hover {
+        filter: brightness(0.7);
+    }
 
   > span {
     font-family: 'Roboto', sans-serif;

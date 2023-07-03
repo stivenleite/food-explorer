@@ -38,9 +38,12 @@ export function SignUp () {
 
     return (
         <Container>
-            <Form>
+            <div className="image-wrapper">
                 <img src={Logo}/>
+            </div>
 
+            <Form>
+                <h1>Crie sua conta</h1>
                 <label>
                     Seu nome
                     <Input

@@ -84,41 +84,43 @@ export function Details () {
 
                     <section>
                         <img src={imageURL} alt="Foto do produto" />
-                        <h1>{product.name}</h1>
-                        <p>{product.description}</p>
-                        
-                        <Tags>
+                        <div className="wrapper">
+                            <h1>{product.name}</h1>
+                            <p>{product.description}</p>
+                            
+                            <Tags>
+                                {
+                                    ingredients.map((ingredient, index) => (
+                                        <Tag 
+                                            key={String(index)}
+                                            title={ingredient}
+                                        />
+                                    ))
+                                }
+                            </Tags>
+
                             {
-                                ingredients.map((ingredient, index) => (
-                                    <Tag 
-                                        key={String(index)}
-                                        title={ingredient}
+                                user.admin ? 
+                                <>
+                                    <Button
+                                        title='Editar prato'
+                                        height='4.8rem'
+                                        width='100%'
+                                        onClick={() => navigate(`/editproduct/${params.id}`)}
                                     />
-                                ))
+                                </> 
+                                : 
+                                <>
+                                    <div className="order">
+                                        <QtdeSelector getQtdeFromSelector={getQtdeFromSelector} />
+                                        <button onClick={handleOrderItem}>
+                                            incluir ∙ {calculatedPrice}
+                                        </button>
+                                    </div>
+                                </>
                             }
-                        </Tags>
-                    </section>
-                    
-                    {
-                        user.admin ? 
-                        <>
-                            <Button
-                                title='Editar prato'
-                                height='4.8rem'
-                                width='100%'
-                                onClick={() => navigate(`/editproduct/${params.id}`)}
-                            />
-                        </> 
-                        : 
-                        <>
-                            <div className="order">
-                                <QtdeSelector getQtdeFromSelector={getQtdeFromSelector} />
-                                <button onClick={handleOrderItem}>
-                                    incluir ∙ {calculatedPrice}
-                                </button>
-                            </div>
-                        </>
-                    }
+                        </div>
+                    </section>             
                 </Content>
             </main>
 

@@ -71,6 +71,55 @@ export const Content = styled.div`
       background-color: ${({theme}) => theme.colors.dark800};
     }
   }
+
+  @media (min-width: 1000px) {
+    margin-inline: auto;
+    max-width: 112rem;
+
+    > button:first-child {
+      font-size: 24px;
+      margin-left: 0;
+      margin-bottom: 2.4rem;
+    }
+
+    > form {
+      h1 {
+        font-size: 3.2rem;
+        font-weight: 500;
+      }
+
+      .first-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 3.2rem;
+      }
+
+      .second-wrapper {
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        gap: 3.2rem;
+
+        .ingredients-wrapper {
+          padding: .8rem;
+          height: fit-content;
+        }
+      }
+
+      .buttons-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 3.2rem;
+
+        button {
+          width: fit-content;
+          padding-inline: 2.4rem;
+          align-self: flex-end; 
+        }
+
+      }
+    }
+  }
 `;
 
 export const InputFile = styled.div`

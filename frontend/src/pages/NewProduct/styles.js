@@ -45,6 +45,18 @@ export const Content = styled.div`
         color: ${({theme}) => theme.colors.light400};
         font-family: 'Roboto', sans-serif;
     }
+
+    .first-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    .second-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
   }
 
   .ingredients-wrapper {
@@ -60,6 +72,47 @@ export const Content = styled.div`
     padding: 1.4rem;
 
     border-radius: 0.8rem;
+  }
+
+  @media (min-width: 1000px) {
+    margin-inline: auto;
+    max-width: 112rem;
+
+    > button:first-child {
+      font-size: 24px;
+      margin-left: 0;
+      margin-bottom: 2.4rem;
+    }
+
+    > form {
+      h1 {
+        font-size: 3.2rem;
+        font-weight: 500;
+      }
+
+      .first-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 3.2rem;
+      }
+
+      .second-wrapper {
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        gap: 3.2rem;
+
+        .ingredients-wrapper {
+          padding: .8rem;
+          height: fit-content;
+        }
+      }
+
+      #save-button {
+        width: fit-content;
+        padding-inline: 2.4rem;
+        align-self: flex-end; 
+      }
+    }
   }
 `;
 

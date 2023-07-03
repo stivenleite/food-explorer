@@ -92,72 +92,76 @@ export function NewProduct () {
           <form>
             <h1>Novo prato</h1>
 
-            <label>
-              Imagem do produto
-              <InputFile>
-                <input type="file" onChange={handleInputImage}/>
-                <div className="wrapper">
-                  <FiShare />
-                  Selecione imagem
-              </div>
-              </InputFile>
-            </label>
+            <div className="first-wrapper">
+              <label>
+                Imagem do produto
+                <InputFile>
+                  <input type="file" onChange={handleInputImage}/>
+                  <div className="wrapper">
+                    <FiShare />
+                    Selecione imagem
+                </div>
+                </InputFile>
+              </label>
 
-            <label>
-              Nome
-              <Input 
-                type='text'
-                placeholder='Ex.: Salada Ceasar'
-                onChange={e => setName(e.target.value)}
-              />
-            </label>
-
-            <label>
-              Categoria
-              <SelectContainer>
-                <select name="category" onChange={e => setCategory(e.target.value)}>
-                    <option defaultValue="">Selecione</option>
-                    <option value="Entradas">Entradas</option>
-                    <option value="Aperitivos">Aperitivos</option>
-                    <option value="Refeições">Refeições</option>
-                    <option value="Pratos Principais">Pratos Principais</option>
-                    <option value="Sobremesas">Sobremesas</option>
-                    <option value="Bebidas">Bebidas</option>
-                </select>
-                <FiChevronDown />
-              </SelectContainer>
-            </label>
-
-            <label>
-              Ingredientes
-              <div className="ingredients-wrapper">
-                {
-                  ingredients.map((ingredient, index) => (
-                    <ProductTag
-                      key={String(index)} 
-                      value={ingredient}
-                      onClick={() => handleRemoveIngredient(ingredient)}
-                    />
-                  ))
-                }    
-                <ProductTag 
-                  isNew
-                  placeholder='Adicionar' 
-                  onChange={e => setNewIngredient(e.target.value)}
-                  value={newIngredient}
-                  onClick={handleAddIngredient}
+              <label>
+                Nome
+                <Input 
+                  type='text'
+                  placeholder='Ex.: Salada Ceasar'
+                  onChange={e => setName(e.target.value)}
                 />
-              </div>
-            </label>
+              </label>
 
-            <label>
-              Preço
-              <Input 
-                type='text'
-                placeholder='Ex.: 40,00'
-                onChange={e => setPrice(e.target.value)}
-              />
-            </label>
+              <label>
+                Categoria
+                <SelectContainer>
+                  <select name="category" onChange={e => setCategory(e.target.value)}>
+                      <option defaultValue="">Selecione</option>
+                      <option value="Entradas">Entradas</option>
+                      <option value="Aperitivos">Aperitivos</option>
+                      <option value="Refeições">Refeições</option>
+                      <option value="Pratos Principais">Pratos Principais</option>
+                      <option value="Sobremesas">Sobremesas</option>
+                      <option value="Bebidas">Bebidas</option>
+                  </select>
+                  <FiChevronDown />
+                </SelectContainer>
+              </label>
+            </div>
+
+            <div className="second-wrapper">
+              <label>
+                Ingredientes
+                <div className="ingredients-wrapper">
+                  {
+                    ingredients.map((ingredient, index) => (
+                      <ProductTag
+                        key={String(index)} 
+                        value={ingredient}
+                        onClick={() => handleRemoveIngredient(ingredient)}
+                      />
+                    ))
+                  }    
+                  <ProductTag 
+                    isNew
+                    placeholder='Adicionar' 
+                    onChange={e => setNewIngredient(e.target.value)}
+                    value={newIngredient}
+                    onClick={handleAddIngredient}
+                  />
+                </div>
+              </label>
+
+              <label>
+                Preço
+                <Input 
+                  type='text'
+                  placeholder='Ex.: 40,00'
+                  onChange={e => setPrice(e.target.value)}
+                />
+              </label>
+            </div>
 
             <label>
               Descrição
@@ -167,7 +171,8 @@ export function NewProduct () {
               />
             </label>
 
-            <Button 
+            <Button
+              id='save-button' 
               title='Salvar alterações' 
               height='4.8rem' 
               disabled={disableButton}

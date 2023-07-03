@@ -24,9 +24,12 @@ export function SignIn () {
 
     return (
         <Container>
-            <Form>
+            <div className="image-wrapper">
                 <img src={Logo}/>
-
+            </div>
+            
+            <Form>
+                <h1>Faça login</h1>
                 <label>
                     Email
                     <Input
