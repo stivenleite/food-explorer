@@ -158,6 +158,7 @@ export function EditProduct () {
                       <option value="Entradas">Entradas</option>
                       <option value="Aperitivos">Aperitivos</option>
                       <option value="Refeições">Refeições</option>
+                      <option value="Acompanhamentos">Acompanhamentos</option>
                       <option value="Pratos Principais">Pratos Principais</option>
                       <option value="Sobremesas">Sobremesas</option>
                       <option value="Bebidas">Bebidas</option>

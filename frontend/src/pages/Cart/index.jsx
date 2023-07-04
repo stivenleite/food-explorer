@@ -10,7 +10,6 @@ import { Container, Content, Items } from "./styles";
 
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import { Button } from "../../components/Button";
 
 import { FiChevronLeft } from "react-icons/fi"
 
@@ -67,13 +66,6 @@ export function Cart () {
                 </Items>
 
                 <span>Total: R$ {totalPrice}</span>
-
-                <Button 
-                    title="Avançar"
-                    height="4.8rem"
-                    width="17rem"
-                    onClick={() => alert("Função não implementada.")}
-                />
             </Content>
         </main>
 

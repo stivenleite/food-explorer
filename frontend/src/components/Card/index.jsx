@@ -88,8 +88,6 @@ export function Card ({image, title, price, id, ...rest}) {
               onClick={handleOrderItem}
             />
           </div>
-
-          <FiHeart size={24} onClick={() => alert("Função não habilitada até o momento.")}/>
         </>
       }
     </Container>

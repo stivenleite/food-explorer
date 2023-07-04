@@ -15,25 +15,26 @@ export function Home (){
     const [search, setSearch] = useState("");
     const [categories, setCategories] = useState([]);
     const [sliderPosition, setSliderPosition] = useState(0);
-    const slider = useRef();
     const [reachedEnd, setReachedEnd] = useState(false);
+    const slider = document.getElementById('slider');
 
     const dataFromHeaderMenuMobile = (data) => {
         setSearch(data);
     };
 
     function scrollLeft () {
-        slider.current.scrollLeft -= 294;
-        setSliderPosition(slider.current.scrollLeft)
+        slider.scrollLeft -= 94;
+        setSliderPosition(slider.scrollLeft)
 
         setReachedEnd(false);
     }
 
     function scrollRight () {
-        slider.current.scrollLeft += 294
-        setSliderPosition(slider.current.scrollLeft)
+        slider.scrollLeft += 94;
 
-        const isEndReached = slider.current.scrollLeft === (slider.current.scrollWidth - slider.current.offsetWidth);
+        setSliderPosition(slider.scrollLeft)
+
+        const isEndReached = slider.scrollLeft === (slider.scrollWidth - slider.offsetWidth);
         setReachedEnd(isEndReached);
     }
 
@@ -73,7 +74,7 @@ export function Home (){
                         categories.map((category, index) => (
                         <section key={index}>    
                                 <h2>{category}</h2>
-                                <SliderContainer ref={slider} onScroll={e => handleSliderScroll(e)}>
+                                <SliderContainer id="slider" onScroll={e => handleSliderScroll(e)}>
                                     {
                                         products
                                             .filter(product => product.category == category)

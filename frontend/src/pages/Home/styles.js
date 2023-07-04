@@ -101,12 +101,18 @@ export const Content = styled.div`
 
     @media (min-width: 1000px) {
         > section {
-            margin-inline: 0%;
+            margin-inline: 2%;
 
             h2 {
                 font-size: 3.2rem;
                 font-weight: 400;
             }
+        }
+    }
+
+    @media (min-width: 1160px) {
+        > section {
+            margin-inline: 0;
         }
     }
 `;
@@ -252,13 +258,9 @@ export const SliderContainer = styled.div`
     gap: 1.6rem;
     flex-wrap: nowrap;
     overflow-x: auto;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;    
 
     -webkit-overflow-scrolling: touch;
-
-    div:last-child {
-        margin-right: 2.4rem;
-    }
 
     ::-webkit-scrollbar {
         display: none;

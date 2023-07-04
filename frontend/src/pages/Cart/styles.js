@@ -48,6 +48,21 @@ export const Content = styled.div`
     > button {
         align-self: flex-end;
     }
+
+    @media (min-width: 1000px) {
+        margin-inline: auto;
+        max-width: 112rem;
+
+        > button:first-child {
+            font-size: 24px;
+            margin-left: 0;
+        }
+
+        > span {
+            font-size: 2.2rem;
+            align-self: end;
+        }
+    }
 `;
 
 export const Items = styled.ul`
@@ -86,6 +101,28 @@ export const Items = styled.ul`
             font-family: "Roboto", sans-serif;
             font-size: 1.2rem;
             color: ${({theme}) => theme.colors.tomato400};
+        }
+    }
+
+    @media (min-width: 1000px) {
+        > li {
+            img {
+                width: 12rem;
+            }
+            
+            span h2 {
+                font-size: 2.2rem;
+
+                span {
+                    display: inline;
+                    margin-left: 2rem;
+                    font-size: 1.6rem;
+                }
+            }
+
+            span button {
+                font-size: 1.6rem;
+            }
         }
     }
 `;
