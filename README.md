@@ -15,12 +15,6 @@ Food Explorer is a user-friendly and feature-rich restaurant web application tha
 - Clients can conveniently search for specific products by name or ingredients, making it simple to find their favorite dishes or discover new ones.
 - A secure login system ensures that user accounts are protected, and roles are clearly defined, with access rights granted accordingly.
 
-## Contributing
-
-Contributions are always welcome!
-
-The application is not responsive yet, so feel free to work on that.
-
 ## Technologies Used
 
 - Front-end: React, HTML, CSS, JavaScript
